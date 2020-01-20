@@ -20,7 +20,7 @@ urlpatterns = [
     path('profile/jobs/<int:pk>/', JobDetailsAPIView.as_view()),
     path('profile/socials/', SocialLinkDetailsAPIView.as_view()),
     path('profile/socials/create/', SocialLinkCreateAPIView.as_view()),
-    path('profile-card/', ProfileCardDetailsAPIView.as_view()),
-    path('profiles-recent-alumni/', AlumniProfileListAPIView.as_view()),
-    path('profiles-recent-alumni/<int:pk>/', AlumniProfileDetailsAPIView.as_view()),
+    path('profile/profile-card/', ProfileCardDetailsAPIView.as_view()),
+    path('profiles-alumni/', AlumniProfileListAPIView.as_view()),
+    path('profiles-alumni/<int:pk>/', AlumniProfileDetailsAPIView.as_view()),
 ]

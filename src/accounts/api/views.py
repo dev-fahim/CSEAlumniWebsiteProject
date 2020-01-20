@@ -30,7 +30,10 @@ class ProfileCardDetailsAPIView(RetrieveAPIView):
         return get_object_or_404(self.get_queryset(), user_id=self.request.user.id)
 
     def get_queryset(self):
-        return Account.objects.filter(user_id=self.request.user.id)
+        return Account.objects.filter(user_id=self.request.user.id)\
+            .prefetch_related('jobs')\
+            .select_related('social')\
+            .select_related('user')
 
 
 class AlumniProfileListAPIView(ListAPIView):
@@ -38,7 +41,10 @@ class AlumniProfileListAPIView(ListAPIView):
     serializer_class = AlumniSerializer
 
     def get_queryset(self):
-        query_sets = Account.objects.all()
+        query_sets = Account.objects.all()\
+            .prefetch_related('jobs')\
+            .select_related('social')\
+            .select_related('user')
         if self.request.query_params.get('recent', None) == 'true':
             query_sets = query_sets.filter(
                 graduation_year__lte=timezone.now().year, graduation_year__gte=timezone.now().year-1
@@ -56,7 +62,10 @@ class AlumniProfileDetailsAPIView(RetrieveAPIView):
     lookup_field = 'pk'
 
     def get_queryset(self):
-        return Account.objects.all()
+        return Account.objects.all()\
+            .prefetch_related('jobs')\
+            .select_related('social')\
+            .select_related('user')
 
 
 class ProfileDetailsAPIView(RetrieveUpdateAPIView):
@@ -68,7 +77,10 @@ class ProfileDetailsAPIView(RetrieveUpdateAPIView):
         return get_object_or_404(self.get_queryset(), user_id=self.request.user.id)
 
     def get_queryset(self):
-        return Account.objects.filter(user_id=self.request.user.id)
+        return Account.objects.filter(user_id=self.request.user.id)\
+            .prefetch_related('jobs')\
+            .select_related('social')\
+            .select_related('user')
 
 
 class SocialLinkDetailsAPIView(RetrieveUpdateAPIView):
