@@ -37,7 +37,7 @@ class Account(models.Model):
     graduation_year = models.PositiveSmallIntegerField()
     session = models.CharField(choices=SESSIONS_CHOICE, max_length=50)
 
-    profile_picture = models.ImageField()
+    profile_picture = models.ImageField(null=True)
 
     phone_number = PhoneNumberField(max_length=255)
     present_address = models.TextField()
@@ -53,8 +53,10 @@ class Account(models.Model):
 class JobDetail(models.Model):
     accounts = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='jobs')
 
-    jon_from = models.DateField()
-    job_to = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='jobs')
+
+    job_from = models.DateField()
+    job_to = models.DateField(null=True, blank=True)
     currently = models.BooleanField(default=False)
 
     designation = models.CharField(max_length=255)
@@ -72,6 +74,8 @@ class JobDetail(models.Model):
 class SocialLink(models.Model):
     accounts = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='social')
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='social')
+
     facebook = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
     twitter = models.URLField(null=True, blank=True)
@@ -83,4 +87,4 @@ class SocialLink(models.Model):
     objects = models.QuerySet()
 
     def __str__(self):
-        return self.accounts
+        return self.accounts.__str__()
