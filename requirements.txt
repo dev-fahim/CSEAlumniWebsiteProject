@@ -5,8 +5,10 @@ django-cors-headers==3.2.1
 django-debug-toolbar==2.1
 django-filter==1.1.0
 django-phonenumber-field==4.0.0
+django-templated-mail==1.1.1
 djangorestframework==3.11.0
 djangorestframework-filters==0.11.1
+djoser==2.0.3
 phonenumbers==8.11.1
 Pillow==7.0.0
 pytz==2019.3

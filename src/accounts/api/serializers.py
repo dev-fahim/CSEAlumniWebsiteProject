@@ -78,7 +78,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = (
-            'profile_picture',
             'profile_picture_link',
             'username',
             'name',
@@ -188,6 +187,30 @@ class AlumniSingleSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_name(obj: Account):
         return f'{obj.first_name} {obj.last_name}'
+
+    def get_profile_picture_link(self, obj: Account):
+        if obj.profile_picture is None:
+            obj.profile_picture.url = None
+        protocol = 'https'
+        request: HttpRequest = self.context['request']
+        if request.is_secure() is False:
+            protocol = 'http'
+        return f'{protocol}://{request.get_host()}/{obj.profile_picture.url}'
+
+
+class ProfilePictureSerializer(serializers.ModelSerializer):
+
+    profile_picture_link = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Account
+        fields = (
+            'profile_picture_link',
+            'profile_picture',
+        )
+        extra_kwargs = {
+            'profile_picture': {'write_only': True, 'required': False}
+        }
 
     def get_profile_picture_link(self, obj: Account):
         if obj.profile_picture is None:

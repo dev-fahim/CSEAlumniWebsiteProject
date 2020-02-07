@@ -12,14 +12,16 @@ from accounts.api.serializers import (
     AlumniSingleSerializer,
     JobSerializer,
     SocialLinkSerializer,
+    ProfilePictureSerializer
 )
 from accounts.models import Account, SocialLink, JobDetail
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import FileUploadParser, ParseError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from PIL import Image
 
 
 class ProfileCardDetailsAPIView(RetrieveAPIView):
@@ -71,7 +73,6 @@ class AlumniProfileDetailsAPIView(RetrieveAPIView):
 class ProfileDetailsAPIView(RetrieveUpdateAPIView):
 
     serializer_class = ProfileSerializer
-    permission_class = [FileUploadParser, ]
 
     def get_object(self):
         return get_object_or_404(self.get_queryset(), user_id=self.request.user.id)
@@ -131,3 +132,22 @@ class JobCreateAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, accounts=self.request.user.account)
+
+
+class ImageUploadParser(FileUploadParser):
+    media_type = 'image/*'
+
+
+class ProfilePictureUploadAPIView(RetrieveUpdateAPIView):
+
+    parser_class = (ImageUploadParser,)
+    serializer_class = ProfilePictureSerializer
+
+    def get_object(self):
+        return get_object_or_404(self.get_queryset(), user_id=self.request.user.id)
+
+    def get_queryset(self):
+        return Account.objects.filter(user_id=self.request.user.id)\
+            .prefetch_related('jobs')\
+            .select_related('social')\
+            .select_related('user')

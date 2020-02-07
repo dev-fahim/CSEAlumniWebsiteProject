@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w^^=g3ku$zuhp!2=vd&q$nym1%((b+z08^g$^z8ncwkixfo*ur'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ.get('DEBUG') == "1" else False
 
 ALLOWED_HOSTS = []
 
@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #"grappelli",
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djoser',
     'corsheaders',
     'accounts',
+    'admin_site',
     'debug_toolbar',
 ]
 
@@ -74,6 +78,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 
 # Database
@@ -128,9 +140,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "statics"),
-]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -147,3 +158,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
+
+GRAPPELLI_ADMIN_TITLE = "CSE Alumni website"
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

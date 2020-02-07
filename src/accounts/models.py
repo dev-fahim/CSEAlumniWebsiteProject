@@ -28,21 +28,21 @@ class Account(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
 
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    birth_date = models.DateField()
+    first_name = models.CharField(max_length=255, null=True)
+    last_name = models.CharField(max_length=255, null=True)
+    birth_date = models.DateField(null=True)
 
-    department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, default=DEPARTMENT_CHOICE[0][1])
-    intake = models.PositiveSmallIntegerField()
-    graduation_year = models.PositiveSmallIntegerField()
-    session = models.CharField(choices=SESSIONS_CHOICE, max_length=50)
+    department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, null=True)
+    intake = models.PositiveSmallIntegerField(null=True)
+    graduation_year = models.PositiveSmallIntegerField(null=True)
+    session = models.CharField(choices=SESSIONS_CHOICE, max_length=50, null=True)
 
     profile_picture = models.ImageField(null=True)
 
-    phone_number = PhoneNumberField(max_length=255)
-    present_address = models.TextField()
-    permanent_address = models.TextField()
-    email = models.EmailField()
+    phone_number = PhoneNumberField(max_length=255, null=True)
+    present_address = models.TextField(null=True)
+    permanent_address = models.TextField(null=True)
+    email = models.EmailField(null=True)
 
     objects = models.QuerySet()
 
@@ -52,8 +52,6 @@ class Account(models.Model):
 
 class JobDetail(models.Model):
     accounts = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='jobs')
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='jobs')
 
     job_from = models.DateField()
     job_to = models.DateField(null=True, blank=True)
@@ -68,13 +66,11 @@ class JobDetail(models.Model):
     objects = models.QuerySet()
 
     def __str__(self):
-        return self.accounts
+        return f'{self.institute_name} / {self.designation}'
 
 
 class SocialLink(models.Model):
     accounts = models.OneToOneField(Account, on_delete=models.CASCADE, related_name='social')
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='social')
 
     facebook = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)

@@ -8,7 +8,8 @@ from accounts.api.views import (
     SocialLinkCreateAPIView,
     JobListAPIView,
     JobCreateAPIView,
-    JobDetailsAPIView
+    JobDetailsAPIView,
+    ProfilePictureUploadAPIView,
 )
 
 app_name = 'accounts'
@@ -21,6 +22,7 @@ urlpatterns = [
     path('profile/socials/', SocialLinkDetailsAPIView.as_view()),
     path('profile/socials/create/', SocialLinkCreateAPIView.as_view()),
     path('profile/profile-card/', ProfileCardDetailsAPIView.as_view()),
+    path('profile/profile-picture/', ProfilePictureUploadAPIView.as_view()),
     path('profiles-alumni/', AlumniProfileListAPIView.as_view()),
     path('profiles-alumni/<int:pk>/', AlumniProfileDetailsAPIView.as_view()),
 ]
