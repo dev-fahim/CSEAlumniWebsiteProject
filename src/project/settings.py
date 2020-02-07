@@ -161,6 +161,4 @@ INTERNAL_IPS = [
 
 GRAPPELLI_ADMIN_TITLE = "CSE Alumni website"
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
