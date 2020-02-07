@@ -27,7 +27,6 @@ admin.site.site_title = "Begum Rokeya University / CSE Alumni Association Websit
 admin.site.index_title = "Begum Rokeya University / CSE Alumni Association Website"
 
 urlpatterns = [
-    path('grappelli/', include('grappelli.urls')),
     path('', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('accounts.api.urls', namespace='accounts')),
