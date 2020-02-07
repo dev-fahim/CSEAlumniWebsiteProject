@@ -9,4 +9,5 @@
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Save person</button>
   </form>
+  <a href="{% url 'admin:login' %}" class="btn btn-primary mt-2">Login</a>
 {% endblock %}
