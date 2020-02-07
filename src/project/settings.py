@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = '/cse/static/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/cse/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
