@@ -27,13 +27,11 @@ admin.site.site_title = "Begum Rokeya University / CSE Alumni Association Websit
 admin.site.index_title = "Begum Rokeya University / CSE Alumni Association Website"
 
 urlpatterns = [
-    path('cse/', include([
-        path('', admin.site.urls),
-        path('api-auth/', include('rest_framework.urls')),
-        path('api/', include('accounts.api.urls', namespace='accounts')),
-        re_path(r'^signup/$', core_views.signup, name='signup'),
-        re_path(r'^auth/', include('djoser.urls')),
-    ]))
+    path('', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('accounts.api.urls', namespace='accounts')),
+    re_path(r'^signup/$', core_views.signup, name='signup'),
+    re_path(r'^auth/', include('djoser.urls')),
 ]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
             #  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
