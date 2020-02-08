@@ -29,8 +29,8 @@ class Account(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
 
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True, default=" ")
+    last_name = models.CharField(max_length=255, null=True, blank=True, default=" ")
     birth_date = models.DateField(null=True, help_text=date_format, blank=True)
 
     department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, null=True, blank=True)
@@ -58,8 +58,8 @@ class JobDetail(models.Model):
     job_to = models.DateField(null=True, blank=True, help_text=date_format)
     currently = models.BooleanField(default=False, blank=True)
 
-    designation = models.CharField(max_length=255, blank=True)
-    institute_name = models.CharField(max_length=255, blank=True)
+    designation = models.CharField(max_length=255, blank=True, default=" ")
+    institute_name = models.CharField(max_length=255, blank=True, default=" ")
     institute_type = models.CharField(max_length=255, blank=True)
     institute_website = models.URLField(null=True, blank=True)
     institute_address = models.TextField(null=True, blank=True)
