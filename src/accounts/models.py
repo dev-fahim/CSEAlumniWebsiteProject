@@ -54,13 +54,13 @@ class Account(models.Model):
 class JobDetail(models.Model):
     accounts = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='jobs')
 
-    job_from = models.DateField(help_text=date_format, blank=True)
+    job_from = models.DateField(help_text=date_format, blank=True, null=True)
     job_to = models.DateField(null=True, blank=True, help_text=date_format)
-    currently = models.BooleanField(default=False, blank=True)
+    currently = models.BooleanField(default=False, blank=True, null=True)
 
-    designation = models.CharField(max_length=255, blank=True, default=" ")
-    institute_name = models.CharField(max_length=255, blank=True, default=" ")
-    institute_type = models.CharField(max_length=255, blank=True)
+    designation = models.CharField(max_length=255, blank=True, default=" ", null=True)
+    institute_name = models.CharField(max_length=255, blank=True, default=" ", null=True)
+    institute_type = models.CharField(max_length=255, blank=True, null=True)
     institute_website = models.URLField(null=True, blank=True)
     institute_address = models.TextField(null=True, blank=True)
 
