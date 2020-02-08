@@ -29,21 +29,21 @@ class Account(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
 
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
-    birth_date = models.DateField(null=True, help_text=date_format)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
+    birth_date = models.DateField(null=True, help_text=date_format, blank=True)
 
-    department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, null=True)
-    intake = models.PositiveSmallIntegerField(null=True)
-    graduation_year = models.PositiveSmallIntegerField(null=True)
-    session = models.CharField(choices=SESSIONS_CHOICE, max_length=50, null=True)
+    department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, null=True, blank=True)
+    intake = models.PositiveSmallIntegerField(null=True, blank=True)
+    graduation_year = models.PositiveSmallIntegerField(null=True, blank=True)
+    session = models.CharField(choices=SESSIONS_CHOICE, max_length=50, null=True, blank=True)
 
-    profile_picture = models.ImageField(null=True)
+    profile_picture = models.ImageField(null=True, blank=True)
 
-    phone_number = PhoneNumberField(max_length=255, null=True)
-    present_address = models.TextField(null=True)
-    permanent_address = models.TextField(null=True)
-    email = models.EmailField(null=True)
+    phone_number = PhoneNumberField(max_length=255, null=True, blank=True)
+    present_address = models.TextField(null=True, blank=True)
+    permanent_address = models.TextField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
 
     objects = models.QuerySet()
 
@@ -54,15 +54,15 @@ class Account(models.Model):
 class JobDetail(models.Model):
     accounts = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='jobs')
 
-    job_from = models.DateField(help_text=date_format)
+    job_from = models.DateField(help_text=date_format, blank=True)
     job_to = models.DateField(null=True, blank=True, help_text=date_format)
-    currently = models.BooleanField(default=False)
+    currently = models.BooleanField(default=False, blank=True)
 
-    designation = models.CharField(max_length=255)
-    institute_name = models.CharField(max_length=255)
-    institute_type = models.CharField(max_length=255)
-    institute_website = models.URLField()
-    institute_address = models.TextField()
+    designation = models.CharField(max_length=255, blank=True)
+    institute_name = models.CharField(max_length=255, blank=True)
+    institute_type = models.CharField(max_length=255, blank=True)
+    institute_website = models.URLField(null=True, blank=True)
+    institute_address = models.TextField(null=True, blank=True)
 
     objects = models.QuerySet()
 
