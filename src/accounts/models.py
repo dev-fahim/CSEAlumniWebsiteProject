@@ -3,7 +3,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 
 # Create your models here.
-
+date_format = 'The date format should be yyyy-mm-dd'
 
 class Account(models.Model):
     SESSIONS_CHOICE = (
@@ -30,7 +30,7 @@ class Account(models.Model):
 
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
-    birth_date = models.DateField(null=True)
+    birth_date = models.DateField(null=True, help_text=date_format)
 
     department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICE, null=True)
     intake = models.PositiveSmallIntegerField(null=True)
@@ -53,8 +53,8 @@ class Account(models.Model):
 class JobDetail(models.Model):
     accounts = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='jobs')
 
-    job_from = models.DateField()
-    job_to = models.DateField(null=True, blank=True)
+    job_from = models.DateField(help_text=date_format)
+    job_to = models.DateField(null=True, blank=True, help_text=date_format)
     currently = models.BooleanField(default=False)
 
     designation = models.CharField(max_length=255)
