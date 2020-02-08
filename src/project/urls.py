@@ -30,6 +30,7 @@ urlpatterns = [
     path('', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('accounts.api.urls', namespace='accounts')),
+    re_path(r'^jet/', include('jet.urls', 'jet')),
     re_path(r'^signup/$', core_views.signup, name='signup'),
     re_path(r'^auth/', include('djoser.urls')),
 ]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
