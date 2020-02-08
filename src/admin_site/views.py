@@ -17,7 +17,7 @@ def signup(request):
             login(request, user)
             g = Group.objects.all().first()
             g.user_set.add(user)
-            return redirect('cse/accounts/account')
+            return redirect('admin:accounts_account_add')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})

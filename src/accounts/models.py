@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 date_format = 'The date format should be yyyy-mm-dd'
 
+
 class Account(models.Model):
     SESSIONS_CHOICE = (
         ('2007-2008', '2007-2008'),
