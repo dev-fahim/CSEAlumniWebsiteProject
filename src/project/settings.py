@@ -163,3 +163,4 @@ INTERNAL_IPS = [
 GRAPPELLI_ADMIN_TITLE = "CSE Alumni website"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
