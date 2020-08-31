@@ -7,7 +7,7 @@ django-crispy-forms==1.8.1
 django-debug-toolbar==2.1
 django-dotenv==1.4.2
 django-filter==1.1.0
-django-grappelli==2.13.3
+django-grappelli==2.14.2
 django-jet==1.0.8
 django-phonenumber-field==4.0.0
 django-suit==0.2.28
