@@ -20,6 +20,6 @@ phonenumbers==8.11.1
 Pillow==7.0.0
 PyJWT==1.7.1
 python-memcached==1.59
-pytz==2019.3
+pytz==2020.1
 six==1.14.0
 sqlparse==0.3.0
