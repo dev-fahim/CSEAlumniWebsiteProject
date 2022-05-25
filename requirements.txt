@@ -18,7 +18,7 @@ djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 phonenumbers==8.11.1
 Pillow==7.0.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-memcached==1.59
 pytz==2019.3
 six==1.14.0
